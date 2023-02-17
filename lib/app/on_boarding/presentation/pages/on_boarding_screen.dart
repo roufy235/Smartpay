@@ -7,6 +7,7 @@ import 'package:smartpay/app/on_boarding/presentation/providers/common.dart';
 import 'package:smartpay/app/on_boarding/presentation/widgets/dot_indicator_widget.dart';
 import 'package:smartpay/app/on_boarding/presentation/widgets/onboarding_layout_widget.dart';
 import 'package:smartpay/common/widgets/btn_elevated.dart';
+import 'package:smartpay/common/widgets/btn_text.dart';
 import 'package:smartpay/config/configs.dart';
 import 'package:smartpay/router/router.dart';
 
@@ -39,17 +40,36 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     return Scaffold(
-      body: PageView.builder(
-          controller: pageController,
-          onPageChanged: (index) {
-            setState(() {
-              _pageIndex = index;
-            });
-          },
-          itemCount: items.length,
-          itemBuilder: (BuildContext ctx, int index) {
-            return OnBoardingLayoutWidget(itemEntity: items[index]);
-          }
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(right: 15.w, top: 5.h),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: BtnText(
+                  useFlexibleWith: true,
+                  onPressed: () => context.go('/${AppScreens.loginScreen.toPath}'),
+                  child: const Text(AppStrings.kSkip),
+                ),
+              ),
+            ),
+            Expanded(
+              child: PageView.builder(
+                  controller: pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _pageIndex = index;
+                    });
+                  },
+                  itemCount: items.length,
+                  itemBuilder: (BuildContext ctx, int index) {
+                    return OnBoardingLayoutWidget(itemEntity: items[index]);
+                  }
+              ),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         margin: EdgeInsets.only(
@@ -60,26 +80,29 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
         ),
         color: AppColors.kScaffoldBg,
         child: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ...List.generate(items.length, (index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 4),
-                      child: DotIndicatorWidget(isActive: index == _pageIndex),
-                    );
-                  }),
-                ],
-              ),
-              SizedBox(height: 10.h),
-              BtnElevated(
-                child: const Text(AppStrings.kGetStarted),
-                onPressed: () => context.go('/${AppScreens.loginScreen.toPath}'),
-              ),
-            ],
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 10.h),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ...List.generate(items.length, (index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: DotIndicatorWidget(isActive: index == _pageIndex),
+                      );
+                    }),
+                  ],
+                ),
+                SizedBox(height: 10.h),
+                BtnElevated(
+                  child: const Text(AppStrings.kGetStarted),
+                  onPressed: () => context.go('/${AppScreens.loginScreen.toPath}'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

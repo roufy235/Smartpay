@@ -4,4 +4,9 @@ enum AppScreens {
   forgotPasswordScreen,
   verifyIdentityScreen,
   newPasswordScreen,
+  signUpScreen,
+  emailVerificationScreen,
+  accountInfoScreen,
+  setPinScreen,
+  confirmationScreen,
 }

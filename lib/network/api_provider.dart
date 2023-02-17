@@ -7,7 +7,7 @@ import 'package:smartpay/network/custom_exception.dart';
 class ApiProvider {
   final http.Client _client = http.Client();
   ApiProvider();
-  final String _baseUrl = "";
+  final String _baseUrl = "http://146.190.74.11/api/v1";
 
 
   void cancelRequest() {

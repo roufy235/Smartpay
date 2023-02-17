@@ -8,6 +8,11 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.forgotPasswordScreen: return 'forgotPasswordScreen';
       case AppScreens.verifyIdentityScreen: return 'verifyIdentityScreen';
       case AppScreens.newPasswordScreen: return 'newPasswordScreen';
+      case AppScreens.signUpScreen: return 'signUpScreen';
+      case AppScreens.emailVerificationScreen: return 'emailVerificationScreen';
+      case AppScreens.accountInfoScreen: return 'accountInfoScreen';
+      case AppScreens.setPinScreen: return 'setPinScreen';
+      case AppScreens.confirmationScreen: return 'confirmationScreen';
     }
   }
 
@@ -18,6 +23,11 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.forgotPasswordScreen: return 'forgotPasswordScreen';
       case AppScreens.verifyIdentityScreen: return 'verifyIdentityScreen';
       case AppScreens.newPasswordScreen: return 'newPasswordScreen';
+      case AppScreens.signUpScreen: return 'signUpScreen';
+      case AppScreens.emailVerificationScreen: return 'emailVerificationScreen';
+      case AppScreens.accountInfoScreen: return 'accountInfoScreen';
+      case AppScreens.setPinScreen: return 'setPinScreen';
+      case AppScreens.confirmationScreen: return 'confirmationScreen';
     }
   }
 }

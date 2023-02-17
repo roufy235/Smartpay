@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smartpay/common/widgets/app_input_widget.dart';
 import 'package:smartpay/common/widgets/btn_elevated.dart';
 import 'package:smartpay/config/configs.dart';
 import 'package:smartpay/generated/assets.dart';

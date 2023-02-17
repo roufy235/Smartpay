@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smartpay/app/on_boarding/domain/entities/item_entity.dart';
-import 'package:smartpay/common/widgets/btn_text.dart';
 import 'package:smartpay/config/configs.dart';
 
 class OnBoardingLayoutWidget extends StatelessWidget {
@@ -20,7 +19,7 @@ class OnBoardingLayoutWidget extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              top: 40.h,
+              top: 30.h,
                 left: 0,
                 right: 0,
                 child: itemEntity.isSvg
@@ -28,7 +27,7 @@ class OnBoardingLayoutWidget extends StatelessWidget {
                     : Image.asset(itemEntity.phoneImage)
             ),
             Positioned(
-                top: 150.h,
+                top: 140.h,
                 left: 0,
                 right: 0,
                 child: SvgPicture.asset(itemEntity.img)
@@ -36,7 +35,7 @@ class OnBoardingLayoutWidget extends StatelessWidget {
             Positioned(
               left: 0,
               right: 0,
-              bottom: 55.h,
+              bottom: 65.h,
               child: Container(
                 padding: EdgeInsets.only(
                   top: 50.h
@@ -49,7 +48,7 @@ class OnBoardingLayoutWidget extends StatelessWidget {
                       style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.w900,
                           color: AppColors.kText,
-                          fontSize: 20.sp
+                          fontSize: 23.sp
                       ),
                     ),
                     SizedBox(height: 10.h),
@@ -64,14 +63,6 @@ class OnBoardingLayoutWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
-              right: 0,
-              child: BtnText(
-                useFlexibleWith: true,
-                onPressed: () {  },
-                child: const Text(AppStrings.kSkip),
-              ),
-            )
           ],
         ),
       ),
