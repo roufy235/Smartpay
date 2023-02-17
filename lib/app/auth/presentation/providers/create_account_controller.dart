@@ -13,12 +13,14 @@ class CreateAccountController extends StateNotifier<CreateAccountState> {
 
   Future<bool> getEmailToken({required String email}) async {
     if (email.isNotEmpty) {
-      state = state.copyWith(isBtnLoading: true);
+      state = state.copyWith(isBtnLoading: true, errorStr: '');
       GetEmailTokenEntity response = await _ref.read(getEmailTokenUseCaseProvider).call(email);
       state = state.copyWith(isBtnLoading: false);
       if (response.status != null && response.status!) {
-        print(response.data!.token.toString());
-        print(email);
+        state = state.copyWith(
+            email: email,
+            code: response.data!.token.toString()
+        );
         return true;
       }
       state = state.copyWith(errorStr: response.message.toString());

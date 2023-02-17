@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smartpay/app/auth/presentation/providers/create_account_controller.dart';
+import 'package:smartpay/app/auth/presentation/providers/freezed/create_account_state.dart';
 import 'package:smartpay/app/on_boarding/presentation/widgets/my_icon_btn.dart';
 import 'package:smartpay/common/widgets/btn_elevated.dart';
 import 'package:smartpay/config/configs.dart';
 import 'package:smartpay/router/router.dart';
 
-class EmailVerificationScreen extends StatefulWidget {
+class EmailVerificationScreen extends ConsumerStatefulWidget {
   const EmailVerificationScreen({Key? key}) : super(key: key);
 
   @override
-  State<EmailVerificationScreen> createState() => _LoginScreenState();
+  ConsumerState<EmailVerificationScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<EmailVerificationScreen> {
+class _LoginScreenState extends ConsumerState<EmailVerificationScreen> {
 
   final _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
+    final CreateAccountState createAccountController = ref.watch(createAccountControllerProvider);
     return Scaffold(
       backgroundColor: AppColors.kWhite,
       body: SafeArea(
@@ -47,7 +51,7 @@ class _LoginScreenState extends State<EmailVerificationScreen> {
                   ),
                 ),
                 SizedBox(height: 5.h),
-                const Text('We send a code to ( *****@mail.com ). Enter it here to verify your identity'),
+                Text('We send a code to ( ${createAccountController.email} ). Enter it here to verify your identity'),
                 SizedBox(height: 30.h),
                 Row(
                   children: [

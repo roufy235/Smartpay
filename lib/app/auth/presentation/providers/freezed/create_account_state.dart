@@ -7,6 +7,8 @@ class CreateAccountState with _$CreateAccountState {
   const factory CreateAccountState({
     @Default(false) bool isBtnLoading,
     @Default('') String errorStr,
+    @Default('') String email,
+    @Default('') String code,
   }) = _CreateAccountState;
 
 }
