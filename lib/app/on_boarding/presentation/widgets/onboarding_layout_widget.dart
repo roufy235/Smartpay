@@ -35,10 +35,11 @@ class OnBoardingLayoutWidget extends StatelessWidget {
             Positioned(
               left: 0,
               right: 0,
-              bottom: 65.h,
+              bottom: 0.h,
               child: Container(
                 padding: EdgeInsets.only(
-                  top: 50.h
+                  top: 50.h,
+                  bottom: 65.h
                 ),
                 color: AppColors.kScaffoldBg,
                 child: Column(
