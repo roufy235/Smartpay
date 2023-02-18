@@ -10,7 +10,11 @@ import 'package:smartpay/app/auth/presentation/pages/new_password_screen.dart';
 import 'package:smartpay/app/auth/presentation/pages/set_pin_screen.dart';
 import 'package:smartpay/app/auth/presentation/pages/sign_up_screen.dart';
 import 'package:smartpay/app/auth/presentation/pages/verify_identity_screen.dart';
+import 'package:smartpay/app/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:smartpay/app/auth/presentation/pages/verify_pin_screen.dart';
 import 'package:smartpay/app/on_boarding/presentation/pages/on_boarding_screen.dart';
+import 'package:smartpay/common/providers/states.dart';
+import 'package:smartpay/resources/hive_repository.dart';
 import 'package:smartpay/router/router.dart';
 
 class AppRouter {
@@ -39,6 +43,16 @@ class AppRouter {
         path: '/${AppScreens.onboarding.toPath}',
         name: AppScreens.onboarding.toName,
         builder: (BuildContext context, GoRouterState state) => const OnBoardingScreen(),
+      ),
+      GoRoute(
+        path: '/${AppScreens.verifyPinScreen.toPath}',
+        name: AppScreens.verifyPinScreen.toName,
+        builder: (BuildContext context, GoRouterState state) => const VerifyPinScreen(),
+      ),
+      GoRoute(
+        path: '/${AppScreens.dashboardScreen.toPath}',
+        name: AppScreens.dashboardScreen.toName,
+        builder: (BuildContext context, GoRouterState state) => const DashboardScreen(),
       ),
       GoRoute(
         path: '/${AppScreens.setPinScreen.toPath}',
@@ -95,7 +109,19 @@ class AppRouter {
           ),
         ]
       ),
-    ]
+    ],
+    redirect: (BuildContext ctx, GoRouterState state) {
+      final HiveRepository hiveRepository = ref.read(hiveRepositoryProvider);
+      String token = hiveRepository.getUserAuthToken();
+      // onboard screen
+      final onboardingLocation = _goRouter.namedLocation(AppScreens.onboarding.toPath);
+      final isGoingOnboardingLocation = state.subloc == onboardingLocation.replaceAll('?', '');
+      final verifyPinLocation = _goRouter.namedLocation(AppScreens.verifyPinScreen.toPath);
+      if (isGoingOnboardingLocation && token.isNotEmpty) {
+        return verifyPinLocation;
+      }
+      return null;
+    }
   );
 
 }

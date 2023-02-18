@@ -1,9 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartpay/app/auth/domain/entities/create_account_entity.dart';
 import 'package:smartpay/app/auth/domain/entities/get_email_token_entity.dart';
+import 'package:smartpay/app/auth/domain/entities/login_entity.dart';
 import 'package:smartpay/app/auth/domain/entities/verify_email_token_entity.dart';
 import 'package:smartpay/app/auth/presentation/providers/common.dart';
 import 'package:smartpay/app/auth/presentation/providers/freezed/create_account_state.dart';
+import 'package:smartpay/common/providers/states.dart';
 
 class CreateAccountController extends StateNotifier<CreateAccountState> {
   final Ref _ref;
@@ -17,6 +19,37 @@ class CreateAccountController extends StateNotifier<CreateAccountState> {
     );
   }
 
+  set updateErrorString (String value) {
+    state = state.copyWith(
+        errorStr : value
+    );
+  }
+
+  Future<bool> loginHandler({
+    required String email,
+    required String password,
+    required String deviceName,
+  }) async {
+    state = state.copyWith(isLoginBtnLoading: true, errorStr: '');
+    final LoginEntity response = await _ref.read(loginUseCaseProvider).call(email: email, password: password, deviceName: deviceName);
+    state = state.copyWith(isLoginBtnLoading: false, errorStr: '');
+    if (response.status != null && response.status! && response.data != null) {
+      await _ref.read(hiveRepositoryProvider).setUserAuthToken(response.data!.token.toString());
+      return true;
+    } else {
+      if (response.errors != null) {
+        if (response.errors!.email != null && response.errors!.email!.isNotEmpty) {
+          state = state.copyWith(errorStr: response.errors!.email![0].toString());
+        } else {
+          state = state.copyWith(errorStr: response.message.toString());
+        }
+      } else {
+        state = state.copyWith(errorStr: response.message.toString());
+      }
+    }
+    return false;
+  }
+
   Future<bool> register({required String firstName, required String username, required String password}) async {
     state = state.copyWith(isSignUpBtnLoading: true, errorStr: '');
     final CreateAccountEntity response = await _ref.read(createAccountUseCaseProvider).call(
@@ -28,7 +61,8 @@ class CreateAccountController extends StateNotifier<CreateAccountState> {
         deviceName: 'web'
     );
     state = state.copyWith(isSignUpBtnLoading: false, errorStr: '');
-    if (response.status != null && response.status!) {
+    if (response.status != null && response.status! && response.data != null) {
+      await _ref.read(hiveRepositoryProvider).setUserAuthToken(response.data!.token.toString());
       return true;
     } else {
       if (response.errors != null) {
@@ -73,11 +107,10 @@ class CreateAccountController extends StateNotifier<CreateAccountState> {
       GetEmailTokenEntity response = await _ref.read(getEmailTokenUseCaseProvider).call(email);
       state = state.copyWith(isBtnLoading: false);
       if (response.status != null && response.status!) {
-        String token = response.data!.token.toString();
+        //String token = response.data!.token.toString();
         state = state.copyWith(
             email: email,
         );
-        print(token);
         return true;
       }
       state = state.copyWith(errorStr: response.message.toString());

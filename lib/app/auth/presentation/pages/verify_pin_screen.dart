@@ -6,20 +6,20 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smartpay/app/auth/presentation/providers/create_account_controller.dart';
 import 'package:smartpay/app/auth/presentation/providers/freezed/create_account_state.dart';
-import 'package:smartpay/app/on_boarding/presentation/widgets/my_icon_btn.dart';
 import 'package:smartpay/common/providers/states.dart';
 import 'package:smartpay/common/widgets/btn_elevated.dart';
+import 'package:smartpay/common/widgets/btn_text.dart';
 import 'package:smartpay/config/configs.dart';
 import 'package:smartpay/router/router.dart';
 
-class SetPinScreen extends StatefulWidget {
-  const SetPinScreen({Key? key}) : super(key: key);
+class VerifyPinScreen extends StatefulWidget {
+  const VerifyPinScreen({Key? key}) : super(key: key);
 
   @override
-  State<SetPinScreen> createState() => _LoginScreenState();
+  State<VerifyPinScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<SetPinScreen> {
+class _LoginScreenState extends State<VerifyPinScreen> {
 
   late FocusNode _firstNum, _secondNum, _thirdNum, _fourthNum, _fifthNum;
   late TextEditingController _firstNumController, _secondNumController, _thirdNumController, _fourthNumController, _fifthController;
@@ -75,19 +75,13 @@ class _LoginScreenState extends State<SetPinScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 10.h),
-                  MyIconBtn(
-                      onPressed: () => context.pop(),
-                      iconData: Icons.arrow_back_ios
-                  ),
                   SizedBox(height: 30.h),
-                  Text('Set your PIN code',
+                  Text('Enter your pin',
                     style: GoogleFonts.montserrat(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold
                     ),
                   ),
-                  SizedBox(height: 5.h),
-                  const Text('We use state-of-the-art security measures to protect your information at all times'),
                   SizedBox(height: 30.h),
                   Row(
                     children: [
@@ -270,7 +264,7 @@ class _LoginScreenState extends State<SetPinScreen> {
                             onChanged: (value) {
                               if (value.isNotEmpty) {
                                 _fifthNum.unfocus();
-                                _createPinFunc(
+                                _verifyPinFunc(
                                     ref: ref,
                                     createAccountController: createAccountController
                                 );
@@ -295,16 +289,35 @@ class _LoginScreenState extends State<SetPinScreen> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 10.h),
+                  if(createAccountController.errorStr.isNotEmpty)...[
+                    Text(createAccountController.errorStr)
+                  ],
                   SizedBox(height: 50.h),
-                  BtnElevated(
-                      child: const Text('Create Pin'),
-                      onPressed: () {
-                        _createPinFunc(
-                            ref: ref,
-                            createAccountController: createAccountController
-                        );
-                      }
-                  ),
+                  Row(
+                    children: [
+                      BtnText(
+                          useFlexibleWith: true,
+                          child: const Text('Login'),
+                          onPressed: () {
+                            context.go('/${AppScreens.loginScreen.toPath}');
+                          }
+                      ),
+                      SizedBox(width: 20.w),
+                      Expanded(
+                        child: BtnElevated(
+                            useFlexibleWith: true,
+                            child: const Text('Verify Pin'),
+                            onPressed: () {
+                              _verifyPinFunc(
+                                  ref: ref,
+                                  createAccountController: createAccountController
+                              );
+                            }
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               );
             }
@@ -314,14 +327,15 @@ class _LoginScreenState extends State<SetPinScreen> {
     );
   }
 
-  void _createPinFunc({required WidgetRef ref, required CreateAccountState createAccountController}) async {
+  void _verifyPinFunc({required WidgetRef ref, required CreateAccountState createAccountController}) {
     if (_firstNumController.text.isNotEmpty && _secondNumController.text.isNotEmpty && _thirdNumController.text.isNotEmpty && _fourthNumController.text.isNotEmpty && _fifthController.text.isNotEmpty) {
       if (createAccountController.emailVerBtnLoading) return;
       String pin = _firstNumController.text.toString() + _secondNumController.text.toString() + _thirdNumController.text.toString() + _fourthNumController.text.toString() + _fifthController.text.toString();
-      bool response = await ref.read(hiveRepositoryProvider).setPin(pin);
-      if (response) {
-        if(!mounted) return;
-        context.go('/${AppScreens.confirmationScreen.toPath}');
+      String savedPin =  ref.read(hiveRepositoryProvider).getPin();
+      if (savedPin == pin) {
+        context.go('/${AppScreens.dashboardScreen.toPath}');
+      } else {
+        ref.read(createAccountControllerProvider.notifier).updateErrorString = 'Invalid pin';
       }
     }
   }

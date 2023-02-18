@@ -89,7 +89,7 @@ class _LoginScreenState extends ConsumerState<SignUpScreen> {
                     textInputType: TextInputType.emailAddress
                 ),
                 SizedBox(height: 10.h),
-                if(createAccountController.errorStr.isNotEmpty)...[
+                if (createAccountController.errorStr.isNotEmpty)...[
                   Text(createAccountController.errorStr)
                 ],
                 SizedBox(height: 20.h),

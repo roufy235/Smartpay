@@ -13,6 +13,8 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.accountInfoScreen: return 'accountInfoScreen';
       case AppScreens.setPinScreen: return 'setPinScreen';
       case AppScreens.confirmationScreen: return 'confirmationScreen';
+      case AppScreens.dashboardScreen: return 'dashboardScreen';
+      case AppScreens.verifyPinScreen: return 'verifyPinScreen';
     }
   }
 
@@ -28,6 +30,8 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.accountInfoScreen: return 'accountInfoScreen';
       case AppScreens.setPinScreen: return 'setPinScreen';
       case AppScreens.confirmationScreen: return 'confirmationScreen';
+      case AppScreens.dashboardScreen: return 'dashboardScreen';
+      case AppScreens.verifyPinScreen: return 'verifyPinScreen';
     }
   }
 }

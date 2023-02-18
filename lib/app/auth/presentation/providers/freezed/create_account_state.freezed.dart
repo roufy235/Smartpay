@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CreateAccountState {
   bool get isBtnLoading => throw _privateConstructorUsedError;
+  bool get isLoginBtnLoading => throw _privateConstructorUsedError;
   bool get isSignUpBtnLoading => throw _privateConstructorUsedError;
   bool get isPasswordVisible => throw _privateConstructorUsedError;
   bool get emailVerBtnLoading => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $CreateAccountStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isBtnLoading,
+      bool isLoginBtnLoading,
       bool isSignUpBtnLoading,
       bool isPasswordVisible,
       bool emailVerBtnLoading,
@@ -61,6 +63,7 @@ class _$CreateAccountStateCopyWithImpl<$Res, $Val extends CreateAccountState>
   @override
   $Res call({
     Object? isBtnLoading = null,
+    Object? isLoginBtnLoading = null,
     Object? isSignUpBtnLoading = null,
     Object? isPasswordVisible = null,
     Object? emailVerBtnLoading = null,
@@ -73,6 +76,10 @@ class _$CreateAccountStateCopyWithImpl<$Res, $Val extends CreateAccountState>
       isBtnLoading: null == isBtnLoading
           ? _value.isBtnLoading
           : isBtnLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoginBtnLoading: null == isLoginBtnLoading
+          ? _value.isLoginBtnLoading
+          : isLoginBtnLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       isSignUpBtnLoading: null == isSignUpBtnLoading
           ? _value.isSignUpBtnLoading
@@ -116,6 +123,7 @@ abstract class _$$_CreateAccountStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isBtnLoading,
+      bool isLoginBtnLoading,
       bool isSignUpBtnLoading,
       bool isPasswordVisible,
       bool emailVerBtnLoading,
@@ -137,6 +145,7 @@ class __$$_CreateAccountStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isBtnLoading = null,
+    Object? isLoginBtnLoading = null,
     Object? isSignUpBtnLoading = null,
     Object? isPasswordVisible = null,
     Object? emailVerBtnLoading = null,
@@ -149,6 +158,10 @@ class __$$_CreateAccountStateCopyWithImpl<$Res>
       isBtnLoading: null == isBtnLoading
           ? _value.isBtnLoading
           : isBtnLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoginBtnLoading: null == isLoginBtnLoading
+          ? _value.isLoginBtnLoading
+          : isLoginBtnLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       isSignUpBtnLoading: null == isSignUpBtnLoading
           ? _value.isSignUpBtnLoading
@@ -187,6 +200,7 @@ class __$$_CreateAccountStateCopyWithImpl<$Res>
 class _$_CreateAccountState implements _CreateAccountState {
   const _$_CreateAccountState(
       {this.isBtnLoading = false,
+      this.isLoginBtnLoading = false,
       this.isSignUpBtnLoading = false,
       this.isPasswordVisible = false,
       this.emailVerBtnLoading = false,
@@ -198,6 +212,9 @@ class _$_CreateAccountState implements _CreateAccountState {
   @override
   @JsonKey()
   final bool isBtnLoading;
+  @override
+  @JsonKey()
+  final bool isLoginBtnLoading;
   @override
   @JsonKey()
   final bool isSignUpBtnLoading;
@@ -222,7 +239,7 @@ class _$_CreateAccountState implements _CreateAccountState {
 
   @override
   String toString() {
-    return 'CreateAccountState(isBtnLoading: $isBtnLoading, isSignUpBtnLoading: $isSignUpBtnLoading, isPasswordVisible: $isPasswordVisible, emailVerBtnLoading: $emailVerBtnLoading, errorStr: $errorStr, email: $email, selectedCountry: $selectedCountry, selectedCountryCode: $selectedCountryCode)';
+    return 'CreateAccountState(isBtnLoading: $isBtnLoading, isLoginBtnLoading: $isLoginBtnLoading, isSignUpBtnLoading: $isSignUpBtnLoading, isPasswordVisible: $isPasswordVisible, emailVerBtnLoading: $emailVerBtnLoading, errorStr: $errorStr, email: $email, selectedCountry: $selectedCountry, selectedCountryCode: $selectedCountryCode)';
   }
 
   @override
@@ -232,6 +249,8 @@ class _$_CreateAccountState implements _CreateAccountState {
             other is _$_CreateAccountState &&
             (identical(other.isBtnLoading, isBtnLoading) ||
                 other.isBtnLoading == isBtnLoading) &&
+            (identical(other.isLoginBtnLoading, isLoginBtnLoading) ||
+                other.isLoginBtnLoading == isLoginBtnLoading) &&
             (identical(other.isSignUpBtnLoading, isSignUpBtnLoading) ||
                 other.isSignUpBtnLoading == isSignUpBtnLoading) &&
             (identical(other.isPasswordVisible, isPasswordVisible) ||
@@ -251,6 +270,7 @@ class _$_CreateAccountState implements _CreateAccountState {
   int get hashCode => Object.hash(
       runtimeType,
       isBtnLoading,
+      isLoginBtnLoading,
       isSignUpBtnLoading,
       isPasswordVisible,
       emailVerBtnLoading,
@@ -270,6 +290,7 @@ class _$_CreateAccountState implements _CreateAccountState {
 abstract class _CreateAccountState implements CreateAccountState {
   const factory _CreateAccountState(
       {final bool isBtnLoading,
+      final bool isLoginBtnLoading,
       final bool isSignUpBtnLoading,
       final bool isPasswordVisible,
       final bool emailVerBtnLoading,
@@ -280,6 +301,8 @@ abstract class _CreateAccountState implements CreateAccountState {
 
   @override
   bool get isBtnLoading;
+  @override
+  bool get isLoginBtnLoading;
   @override
   bool get isSignUpBtnLoading;
   @override

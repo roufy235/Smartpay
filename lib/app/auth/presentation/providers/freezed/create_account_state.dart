@@ -6,6 +6,7 @@ part 'create_account_state.freezed.dart';
 class CreateAccountState with _$CreateAccountState {
   const factory CreateAccountState({
     @Default(false) bool isBtnLoading,
+    @Default(false) bool isLoginBtnLoading,
     @Default(false) bool isSignUpBtnLoading,
     @Default(false) bool isPasswordVisible,
     @Default(false) bool emailVerBtnLoading,

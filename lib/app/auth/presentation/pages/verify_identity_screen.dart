@@ -18,8 +18,6 @@ class VerifyIdentityScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<VerifyIdentityScreen> {
 
-  final _key = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);

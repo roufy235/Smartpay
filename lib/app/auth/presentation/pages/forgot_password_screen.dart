@@ -18,8 +18,6 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
-  final _key = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);

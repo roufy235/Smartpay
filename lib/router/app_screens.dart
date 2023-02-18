@@ -9,4 +9,6 @@ enum AppScreens {
   accountInfoScreen,
   setPinScreen,
   confirmationScreen,
+  dashboardScreen,
+  verifyPinScreen,
 }
