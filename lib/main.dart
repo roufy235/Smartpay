@@ -7,7 +7,6 @@ import 'package:smartpay/smartpay_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  //Hive.registerAdapter(UserDataHiveAdapter());
   await Hive.openBox(AppStrings.kBoxName);
   runApp(const ProviderScope(child: SmartPayApp()));
 }

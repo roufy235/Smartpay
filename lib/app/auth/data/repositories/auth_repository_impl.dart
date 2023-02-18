@@ -1,5 +1,6 @@
 import 'package:smartpay/app/auth/data/remote/data_sources/auth_repository_data_source.dart';
 import 'package:smartpay/app/auth/domain/entities/get_email_token_entity.dart';
+import 'package:smartpay/app/auth/domain/entities/verify_email_token_entity.dart';
 import 'package:smartpay/app/auth/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
@@ -9,6 +10,11 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<GetEmailTokenEntity> getEmailToken(String email) async {
     return authRepositoryDataSource.getEmailToken(email);
+  }
+
+  @override
+  Future<VerifyEmailTokenEntity> verifyEmailToken({required String email, required String token}) async {
+    return authRepositoryDataSource.verifyEmailToken(email: email, token: token);
   }
 
 }

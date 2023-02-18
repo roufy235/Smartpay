@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartpay/app/auth/data/remote/data_sources/auth_repository_data_source.dart';
-import 'package:smartpay/app/auth/domain/entities/get_email_token_entity.dart';
+import 'package:smartpay/app/auth/data/remote/models/get_email_token_model.dart';
+import 'package:smartpay/app/auth/data/remote/models/verify_email_token_model.dart';
 import 'package:smartpay/common/providers/states.dart';
 import 'package:smartpay/network/api_provider.dart';
 
@@ -14,16 +15,29 @@ class AuthRepositoryDataSourceImpl extends AuthRepositoryDataSource {
   }
 
   @override
-  Future<GetEmailTokenEntity> getEmailToken(String email) async {
+  Future<GetEmailTokenModel> getEmailToken(String email) async {
     Map<String, dynamic> requestData = {
       'email': email
     };
     final response = await _apiProvider.post('/auth/email', requestData, _authToken);
     try {
-      return GetEmailTokenEntity.fromJson(response);
+      return GetEmailTokenModel.fromJson(response);
     } catch (e) {
-      print(e.toString());
-      return GetEmailTokenEntity(status: null, message: '', data: null);
+      return GetEmailTokenModel(status: null, message: '', data: null);
+    }
+  }
+
+  @override
+  Future<VerifyEmailTokenModel> verifyEmailToken({required String email, required String token}) async {
+    Map<String, dynamic> requestData = {
+      'email': email,
+      'token': token
+    };
+    final response = await _apiProvider.post('/auth/email/verify', requestData, _authToken);
+    try {
+      return VerifyEmailTokenModel.fromJson(response);
+    } catch (e) {
+      return VerifyEmailTokenModel(status: null, message: response['message'], data: null);
     }
   }
 

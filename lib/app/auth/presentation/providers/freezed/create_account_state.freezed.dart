@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CreateAccountState {
   bool get isBtnLoading => throw _privateConstructorUsedError;
+  bool get emailVerBtnLoading => throw _privateConstructorUsedError;
   String get errorStr => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get code => throw _privateConstructorUsedError;
@@ -32,7 +33,12 @@ abstract class $CreateAccountStateCopyWith<$Res> {
           CreateAccountState value, $Res Function(CreateAccountState) then) =
       _$CreateAccountStateCopyWithImpl<$Res, CreateAccountState>;
   @useResult
-  $Res call({bool isBtnLoading, String errorStr, String email, String code});
+  $Res call(
+      {bool isBtnLoading,
+      bool emailVerBtnLoading,
+      String errorStr,
+      String email,
+      String code});
 }
 
 /// @nodoc
@@ -49,6 +55,7 @@ class _$CreateAccountStateCopyWithImpl<$Res, $Val extends CreateAccountState>
   @override
   $Res call({
     Object? isBtnLoading = null,
+    Object? emailVerBtnLoading = null,
     Object? errorStr = null,
     Object? email = null,
     Object? code = null,
@@ -57,6 +64,10 @@ class _$CreateAccountStateCopyWithImpl<$Res, $Val extends CreateAccountState>
       isBtnLoading: null == isBtnLoading
           ? _value.isBtnLoading
           : isBtnLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      emailVerBtnLoading: null == emailVerBtnLoading
+          ? _value.emailVerBtnLoading
+          : emailVerBtnLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       errorStr: null == errorStr
           ? _value.errorStr
@@ -82,7 +93,12 @@ abstract class _$$_CreateAccountStateCopyWith<$Res>
       __$$_CreateAccountStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isBtnLoading, String errorStr, String email, String code});
+  $Res call(
+      {bool isBtnLoading,
+      bool emailVerBtnLoading,
+      String errorStr,
+      String email,
+      String code});
 }
 
 /// @nodoc
@@ -97,6 +113,7 @@ class __$$_CreateAccountStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isBtnLoading = null,
+    Object? emailVerBtnLoading = null,
     Object? errorStr = null,
     Object? email = null,
     Object? code = null,
@@ -105,6 +122,10 @@ class __$$_CreateAccountStateCopyWithImpl<$Res>
       isBtnLoading: null == isBtnLoading
           ? _value.isBtnLoading
           : isBtnLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      emailVerBtnLoading: null == emailVerBtnLoading
+          ? _value.emailVerBtnLoading
+          : emailVerBtnLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       errorStr: null == errorStr
           ? _value.errorStr
@@ -127,6 +148,7 @@ class __$$_CreateAccountStateCopyWithImpl<$Res>
 class _$_CreateAccountState implements _CreateAccountState {
   const _$_CreateAccountState(
       {this.isBtnLoading = false,
+      this.emailVerBtnLoading = false,
       this.errorStr = '',
       this.email = '',
       this.code = ''});
@@ -134,6 +156,9 @@ class _$_CreateAccountState implements _CreateAccountState {
   @override
   @JsonKey()
   final bool isBtnLoading;
+  @override
+  @JsonKey()
+  final bool emailVerBtnLoading;
   @override
   @JsonKey()
   final String errorStr;
@@ -146,7 +171,7 @@ class _$_CreateAccountState implements _CreateAccountState {
 
   @override
   String toString() {
-    return 'CreateAccountState(isBtnLoading: $isBtnLoading, errorStr: $errorStr, email: $email, code: $code)';
+    return 'CreateAccountState(isBtnLoading: $isBtnLoading, emailVerBtnLoading: $emailVerBtnLoading, errorStr: $errorStr, email: $email, code: $code)';
   }
 
   @override
@@ -156,6 +181,8 @@ class _$_CreateAccountState implements _CreateAccountState {
             other is _$_CreateAccountState &&
             (identical(other.isBtnLoading, isBtnLoading) ||
                 other.isBtnLoading == isBtnLoading) &&
+            (identical(other.emailVerBtnLoading, emailVerBtnLoading) ||
+                other.emailVerBtnLoading == emailVerBtnLoading) &&
             (identical(other.errorStr, errorStr) ||
                 other.errorStr == errorStr) &&
             (identical(other.email, email) || other.email == email) &&
@@ -163,8 +190,8 @@ class _$_CreateAccountState implements _CreateAccountState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isBtnLoading, errorStr, email, code);
+  int get hashCode => Object.hash(
+      runtimeType, isBtnLoading, emailVerBtnLoading, errorStr, email, code);
 
   @JsonKey(ignore: true)
   @override
@@ -177,12 +204,15 @@ class _$_CreateAccountState implements _CreateAccountState {
 abstract class _CreateAccountState implements CreateAccountState {
   const factory _CreateAccountState(
       {final bool isBtnLoading,
+      final bool emailVerBtnLoading,
       final String errorStr,
       final String email,
       final String code}) = _$_CreateAccountState;
 
   @override
   bool get isBtnLoading;
+  @override
+  bool get emailVerBtnLoading;
   @override
   String get errorStr;
   @override

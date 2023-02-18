@@ -1,12 +1,8 @@
 import 'package:smartpay/app/auth/domain/entities/get_email_token_entity.dart';
 
 class GetEmailTokenModel extends GetEmailTokenEntity {
+  GetEmailTokenModel({required super.status, required super.message, required super.data});
 
-  GetEmailTokenModel({
-    final bool? status,
-    final String? message,
-    final GetEmailTokenModelData? data
-  }) : super(status: false, message: message, data: data);
 
   factory GetEmailTokenModel.fromJson(Map<String, dynamic> json) {
     return GetEmailTokenModel(
@@ -16,32 +12,16 @@ class GetEmailTokenModel extends GetEmailTokenEntity {
     );
   }
 
-  @override
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
-  }
+
 }
 
 class GetEmailTokenModelData extends GetEmailTokenEntityData {
-  GetEmailTokenModelData({final String? token}) : super(token: token);
+  GetEmailTokenModelData({required super.token});
 
   factory GetEmailTokenModelData.fromJson(Map<String, dynamic> json) {
     return GetEmailTokenModelData(
         token : json['token']
     );
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['token'] = token;
-    return data;
   }
 }
 
