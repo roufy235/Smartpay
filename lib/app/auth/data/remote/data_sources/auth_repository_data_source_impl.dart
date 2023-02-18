@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartpay/app/auth/data/remote/data_sources/auth_repository_data_source.dart';
+import 'package:smartpay/app/auth/data/remote/models/create_account_model.dart';
 import 'package:smartpay/app/auth/data/remote/models/get_email_token_model.dart';
 import 'package:smartpay/app/auth/data/remote/models/verify_email_token_model.dart';
 import 'package:smartpay/common/providers/states.dart';
@@ -38,6 +39,33 @@ class AuthRepositoryDataSourceImpl extends AuthRepositoryDataSource {
       return VerifyEmailTokenModel.fromJson(response);
     } catch (e) {
       return VerifyEmailTokenModel(status: null, message: response['message'], data: null);
+    }
+  }
+
+  @override
+  Future<CreateAccountModel> createAccount({
+    required String fullName, required String username,
+    required String email, required String country,
+    required String password, required String deviceName
+  }) async {
+    Map<String, dynamic> requestData = {
+      'full_name': fullName,
+      'username': username,
+      'email': email,
+      'country': country,
+      'password': password,
+      'device_name': deviceName,
+    };
+    final response = await _apiProvider.post('/auth/register', requestData, _authToken);
+    try {
+      return CreateAccountModel.fromJson(response);
+    } catch (e) {
+      try {
+        final errors = CreateAccountModelErrors.fromJson(response['errors']);
+        return CreateAccountModel(status: null, message: response['message'], data: null, errors: errors);
+      } catch (e) {
+        return CreateAccountModel(status: null, message: response['message'], data: null, errors: null);
+      }
     }
   }
 

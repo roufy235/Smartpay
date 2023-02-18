@@ -9,6 +9,6 @@ class VerifyEmailUseCase {
   Future<VerifyEmailTokenEntity> call({
     required String email,
     required String token
-  }) => authRepository.verifyEmailToken(email: email, token: token);
+  }) async => authRepository.verifyEmailToken(email: email, token: token);
 
 }
